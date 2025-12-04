@@ -1,0 +1,87 @@
+#include <stdio.h>
+
+int main() {
+    int rating[10], n = 0, r;
+    int i, choice;
+    int high, low, sum;
+    float avg;
+
+    // Taking ratings from user
+    printf("Enter ratings between 1 to 5 (Enter 0 to stop):\n");
+
+    while (1) {
+        printf("Rating %d: ", n + 1);
+        scanf("%d", &r);
+
+        if (r == 0) {
+            break;
+        }
+
+        if (r < 1 || r > 5) {
+            printf("Invalid rating! Please enter 1 to 5.\n");
+            continue;
+        }
+
+        rating[n] = r;
+        n++;
+    }
+
+    // Menu part
+    do {
+        printf("1. Show all ratings\n");
+        printf("2. Highest rating\n");
+        printf("3. Lowest rating\n");
+        printf("4. Average rating\n");
+        printf("5. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+
+            case 1:
+                printf("Ratings are: ");
+                for (i = 0; i < n; i++) {
+                    printf("%d ", rating[i]);
+                }
+                printf("\n");
+                break;
+
+            case 2:
+                high = rating[0];
+                for (i = 1; i < n; i++) {
+                    if (rating[i] > high)
+                        high = rating[i];
+                }
+                printf("Highest rating = %d\n", high);
+                break;
+
+            case 3:
+                low = rating[0];
+                for (i = 1; i < n; i++) {
+                    if (rating[i] < low)
+                        low = rating[i];
+                }
+                printf("Lowest rating = %d\n", low);
+                break;
+
+            case 4:
+                sum = 0;
+                for (i = 0; i < n; i++) {
+                    sum += rating[i];
+                }
+                avg = (float)sum / n;
+                printf("Average rating = %.2f\n", avg);
+                break;
+
+            case 5:
+                printf("Thank you!\n");
+                break;
+
+            default:
+                printf("Invalid choice!\n");
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
